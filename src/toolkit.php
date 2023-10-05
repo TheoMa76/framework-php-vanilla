@@ -25,21 +25,20 @@ function debugMode($active){
 }
 
 function fromInc($name){
-    include "./templates/includes/". $name . ".inc.php";
-}
-
-function rooter($page){
-    foreach($_GET as $key => $page){
-        if($page === 'accueil'){
-        fromInc('accueil');
-        }
-        else if($page === 'contact'){
-            echo "je suis le contact";
-        }
-        else{
-            echo "erreur 404";
-        }
+    if(file_exists("./templates/includes/". $name . ".inc.php")){
+        include "./templates/includes/". $name . ".inc.php";
+    }
+    else{
+        return "erreur";
     }
 }
 
+function getLayout($name){
+    if(file_exists("./templates/layout/". $name . ".layout.php")){
+        include "./templates/layout/". $name . ".layout.php";
+    }
+    else{
+        return "erreur";
+    }
+}
 

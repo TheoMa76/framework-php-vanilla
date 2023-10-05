@@ -7,4 +7,3 @@
   <!-- <script src="script.js"></script> -->
 </head>
 <body>
-    <p>test pour include header</p>

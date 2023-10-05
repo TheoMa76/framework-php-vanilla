@@ -1,4 +1,4 @@
-<?php
-require_once "./templates/includes/html_header.inc.php";
-require_once "./templates/includes/html_footer.inc.php";
-
+<ul>
+    <li><a href="./?page=accueil">Accueil</a></li>
+    <li><a href="./?page=forum">Forum</a></li>
+</ul>

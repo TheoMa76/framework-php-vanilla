@@ -6,4 +6,8 @@
   <link rel="stylesheet" href="style.css">
   <!-- <script src="script.js"></script> -->
 </head>
+<<<<<<< HEAD
 <body>
+=======
+<body>
+>>>>>>> remote/layouts-and-pages

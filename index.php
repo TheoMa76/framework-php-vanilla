@@ -6,6 +6,4 @@ fromInc("menu");
 fromInc($_GET['page']);
 getLayout()
 
-
-
 ?>

@@ -13,5 +13,10 @@ $pageContent = [
     ]
 ];
 
-include "./templates/layout/". $_GET["layout"] .".layout.php";
+$pageContent = [
+    "html" => ob_get_clean(),
+
+];
+
+include "./templates/layouts/". $_GET["layout"] .".layout.php";
 

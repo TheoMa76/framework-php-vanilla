@@ -1,38 +1,121 @@
 <?php 
 require_once "./src/dbConnect.php";
 
+function queryBuilder($method, $table, ...$payload){
+    $query ="";
+    switch ($method) {
+        case 'c':
+            $query .= "INSERT INTO ";
+            break;
+        case 'r':
+            $query .= "SELECT * FROM ";
+            break;
+        case 'u':
+            $query .= "UPDATE ";
+            break;
+        case 'd':
+            $query .= "DELETE ";
+            break;
+        default:
+           
+            die("ERROR : Prepared query method not defined");
+            break;
+    }
+
+    $query .= '`'.  htmlspecialchars($table) . '` ';
+    if($method ==='u'){
+        $query .= "SET ";
 
 
-function getAll($connection){
-    $statement = $connection->query("SELECT * FROM `contacts` WHERE 1");
-    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-    dd($data);
-    return $data;
-}
-function getById($connection, $id){
-    $statement = $connection->prepare("SELECT * FROM `contacts` WHERE id =  ?");
-    $statement->bindParam(1,$id);
-    $statement->execute();
-    $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-    return $data;
-}
-function create($connection,$name,$surname){ 
-    $statement = $connection->prepare("INSERT INTO `contacts` (`name`, `surname`, `status`) VALUES (?, ?, 'online') ");
-    $statement->bindParam(1,$name);
-    $statement->bindParam(2,$surname);
-    $statement->execute();
-    return $data;
-}
-function deleteById($connection, $id){
-    $statement = $connection->prepare("DELETE FROM `contacts` WHERE id = ?");
-    $statement->bindParam(1, $id);
-    $statement->execute();
-    return $data;
-}
-function update($connection, $column,$valeur,$id){
-    $statement = $connection->prepare("UPDATE `contacts` SET `".$column."` = ? WHERE id = ? ");
-    $statement->bindParam(2, $id);
-    $statement->bindParam(1, $valeur);
-    $statement->execute();
-    return $data;
-}
+    }
+    if($method ==="c"){
+        $columnParse  = '(';
+        $valueParse  = '(';
+        foreach ($payload as $index => $column) {
+            foreach ($column as $key => $value) {
+                if(is_string($value)){
+                    $value = "\"" . $value. "\"";
+                }
+                $columnParse .= "`" . $key . "`"; 
+                 if(!(count($payload) == ($index + 1 ))){
+                $columnParse .= ", ";
+            }
+            }
+
+        }
+        $columnParse.= ")";
+             foreach ($payload as $index => $column) {
+            foreach ($column as $key => $value) {
+                if(is_string($value)){
+                    $value = "\"" . $value. "\"";
+                }
+                $valueParse .= $value ; 
+                 if(!(count($payload) == ($index + 1 ))){
+                $valueParse .= ", ";
+            }
+            }
+
+        }
+        $valueParse.= ")";
+        $query .= $columnParse . " VALUES " . $valueParse;
+    }
+    if($method ==='u'){
+        foreach ($payload as $index => $filter) {
+            foreach ($filter as $key => $value) {
+                if($key !== "id"){
+                    if(is_string($value)){
+                        $value = "\"" . $value. "\"";
+                    }
+                    
+                    $query .= "`" . $key . "` = ". $value .' ' ; 
+                    
+                    if(!(count($payload) == ($index + 2 ))){
+                        $query .= ", ";
+                    }
+                }
+            }
+
+        }
+    }
+    if($method !=='c' && $method !== "u" && count($payload)){
+        $query .= "WHERE ";
+        foreach ($payload as $index => $filter) {
+            foreach ($filter as $key => $value) {
+                if(is_string($value)){
+                    $value = "\"" . $value. "\"";
+                }
+                $query .= "`" . $key . "` = ". $value . " AND "; 
+            }
+            if(count($payload) == ($index + 1 ) && $method !=='r'){
+                $query .= "1";
+            } else if(count($payload) == ($index + 1 )) {
+                $query .= '`status` = "online"';
+            }
+        }
+    } else if($method === "u"){
+        $idFound = false;
+        foreach ($payload as $index => $filter) {
+            foreach ($filter as $key => $value) {
+                if($key === "id"){
+                    $idFound = true;
+                
+                    $query .= "WHERE ";
+                    $query .= "`" . $key . "` = ". $value;
+                } 
+            }
+        }
+        if(!$idFound){
+            die("ERROR : Not id to update");
+        }
+    }
+    
+   return $query;
+
+} 
+// dd(queryBuilder("c", "voiture", ["modele" =>"Ferrari"], ["couleur" => "rouge" ], ["test" => "taste"]));
+// dd(queryBuilder("r", "contacts",  ["name" => "Delaistre" ]));
+// dd(queryBuilder("u", "voiture", ["modele" => "Ferrari" ], ["couleur" => "rouge" ], ["id" => 2]));
+// dd(queryBuilder("d", "voiture", ["modele" => "Ferrari" ], ["couleur" => "rouge" ]));
+
+
+

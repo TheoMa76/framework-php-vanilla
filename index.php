@@ -9,5 +9,4 @@ $pageContent = [
     'html' => ob_get_clean()
 ];
 include "./templates/layout/". $_GET["layout"] .".layout.php";
-debugMode($globalConfigs["debugMode"]);
-?>
+

@@ -2,7 +2,8 @@
 require './src/dbConnect.php';
 require './configs/global.php';
 ?>
-<form action="/" method="post">
+<!--<form action="./index.php" method="post">-->
+<form action="#" method="post">
   <ul>
     <li>
       <label for="name">Nom&nbsp;:</label>
@@ -14,5 +15,9 @@ require './configs/global.php';
     </li>
 
   </ul>
+  <input type="submit" value="ajouter un pelo">
 </form>
-
+<?php
+if(isset($_POST['name'])&& isset($_POST['surname'])){
+    $connection->query(queryBuilder('c','contacts',['name'=>$_POST['name']],['surname'=>$_POST['surname']]));
+}

@@ -18,5 +18,5 @@ $pageContent = [
 
 ];
 
-include "./templates/layouts/". $_GET["layout"] .".layout.php";
+include "./templates/layout/". $_GET["layout"] .".layout.php";
 

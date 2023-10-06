@@ -4,14 +4,16 @@ require_once "./src/dbConnect.php";
 
 
 function getAll($connection){
-    $statement = $connection->query("SELECT * FROM contacts WHERE 1");
+    $statement = $connection->query("SELECT * FROM `contacts` WHERE 1");
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
     dd($data);
 }
 function getById($connection, $id){
-    $statement = $connection->query("SELECT * FROM contacts WHERE id =  ?");
-    $statement = bindParam(1,$id);
+    $statement = $connection->prepare("SELECT * FROM `contacts` WHERE id =  ?");
+    $statement->bindParam(1,$id);
+    $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+
 }
 function create($connection,$name,$surname){ 
     $statement = $connection->prepare("INSERT INTO `contacts` (`name`, `surname`, `status`) VALUES (?, ?, 'online') ");

@@ -10,7 +10,6 @@ $pageContent = [
 ];
 include "./templates/layout/". $_GET["layout"] .".layout.php";
 getAll($connection);
-deleteById($connection,23);
-update($connection,"surname","non",1);
+getById($connection,1);
 
 

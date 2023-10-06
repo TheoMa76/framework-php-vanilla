@@ -35,11 +35,3 @@ function fromInc($name){
         return false;
     }
 }
-
-function getLayout($name){
-    // if(file_exists("./templates/layouts/". $name . ".layout.php")){
-        include "./templates/layouts/". $name . ".layout.php";
-    // }else{
-    //     return false;
-    // }
-}

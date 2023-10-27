@@ -100,6 +100,14 @@ namespace Theo\Controller;
                     }
                     return $raw;
         }
+
+        public function makeColumnName($raw){
+            if(is_string($raw)){
+                $raw = '`'.$raw.'`';
+            }
+            return $raw;
+        }
+
         //Make listing with separator
         public function makeListing($list =[], $separator = "," ,$prefix ="", $suffix = "", $sqlVal = false,$encapsuler = ""){
             $res = $prefix;
@@ -127,6 +135,7 @@ namespace Theo\Controller;
                 $filters = [];
                 foreach ($this->getParams($dataKey) as $key => $filter) {
                     $filter  = $this->makeSqlValue($filter);
+                    $key = $this->makeColumnName($key);
                     $filters[] = "$key = $filter";
                 }
                 $res .= $this->makeListing($filters, $separatedBy);

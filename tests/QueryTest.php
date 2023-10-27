@@ -72,13 +72,13 @@ class QueryTest extends TestCase {
             "filters" => [
                 "col" => "ent"
             ]])->getQuery();
-        $this->assertEquals('UPDATE Table SET name = "Thierry" WHERE `col` = "ent" ;', $query);
+        $this->assertEquals('UPDATE Table SET `name` = "Thierry" WHERE `col` = "ent" ;', $query);
     }
     public function testSoftDelete(){
         $database = new Database( );
 
         $query = $database->table("Table")->delete([
-            'post' => [
+            'delete' => [
                 "name" => "Thierry",
                 "surname" => 2
             ], 
@@ -117,7 +117,7 @@ class QueryTest extends TestCase {
         $database = new Database( );
 
         $query = $database->table("Table")->get([
-        'post' => [
+        'get' => [
             "name" => "Thierry",
             "surname" => 2
         ], ])->getQuery();

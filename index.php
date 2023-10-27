@@ -8,7 +8,6 @@ echo "bonjour";
 $db = new Database();
 echo "salut";
 echo $db->table("Toto")->update(['filters' => ['name' => 'Maerten' , 'surname' => 'Theo']])->getQuery();
-echo "test";
 
 
 

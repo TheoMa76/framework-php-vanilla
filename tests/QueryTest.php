@@ -1,6 +1,7 @@
 <?php 
 use PHPUnit\Framework\TestCase;
-use Jin\Controller\Database;
+use Theo\Controller\Database;
+
 class QueryTest extends TestCase {
 
     public function testMethod(){
@@ -18,7 +19,7 @@ class QueryTest extends TestCase {
             $this->assertEquals("SELECT %s FROM %s WHERE %s ;", $db->get([])->getFormat());
             $this->assertEquals("INSERT INTO %s %s VALUES %s ;", $db->post([])->getFormat());
             $this->assertEquals("UPDATE %s SET %s WHERE %s ;", $db->update([])->getFormat());
-            $this->assertEquals("DELETE FROM %s WHERE %s;", $db->delete([], true)->getFormat());
+            $this->assertEquals("DELETE FROM %s WHERE %s ;", $db->delete([], true)->getFormat());
             $this->assertEquals("UPDATE %s SET %s WHERE %s ;", $db->delete([])->getFormat());
  
     }

@@ -7,7 +7,7 @@ use Theo\Controller\Database;
 echo "bonjour";
 $db = new Database();
 echo "salut";
-echo $db->table("Toto")->update(['filters' => ['name' => 'Maerten' , 'surname' => 'Theo']])->getQuery();
+echo $db->table("Toto")->update(['filters' => ['name' => 'Maerten' , 'surname' => 'Theo'], "post" => ["mail" => "voila@ouais.com"]])->getQuery();
 
 
 

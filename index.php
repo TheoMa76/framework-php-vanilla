@@ -10,9 +10,6 @@ echo "salut";
 echo $db->table("Toto")->update(['filters' => ['name' => 'Maerten' , 'surname' => 'Theo'], "post" => ["mail" => "voila@ouais.com"]])->getQuery();
 
 
-
-
-
 //$result = $pdo->getRelation(["marque","model","avis"],["ordinateur","avis"],"ordinateur.id = ordinateur_id",["ordinateur.id = 15"]);
 //$ordinateur = new Ordinateur("DAUBE","BELLE DAUBE", "0","0","0","999999999");
 //update($ordinateur,10);

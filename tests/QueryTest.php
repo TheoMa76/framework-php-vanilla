@@ -14,11 +14,11 @@ class QueryTest extends TestCase{
     }
 
     public function testFormat(){
-    $database = new Database();
-    $this->assertEquals("get", $database->get([])->getFormat());
-    $this->assertEquals("post", $database->post([])->getFormat());
-    $this->assertEquals("update", $database->update([])->getFormat());
-    $this->assertEquals("soft-delete", $database->update([])->getFormat());
-    $this->assertEquals("delete", $database->delete([],true)->getFormat());
+        $database = new Database();
+        $this->assertEquals("SELECT %s FROM %s WHERE %s ;", $database->get([])->getFormat());
+        $this->assertEquals("UPDATE %s SET %s WHERE %s ;", $database->update([])->getFormat());
+        $this->assertEquals("UPDATE %s SET %s WHERE %s ;", $database->delete([])->getFormat());
+        $this->assertEquals("DELETE FROM %s WHERE %s ;", $database->delete([],true)->getFormat());
+        $this->assertEquals("INSERT INTO %s %s VALUES %s ;",$database->post([])->getFormat());
     }
 }

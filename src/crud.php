@@ -108,11 +108,10 @@ function queryBuilder($method, $table, ...$payload){
         if(!$idFound){
             die("ERROR : Not id to update");
         }
-    }
-    
+    }    
    return $query;
-
 } 
+
 // dd(queryBuilder("c", "voiture", ["modele" =>"Ferrari"], ["couleur" => "rouge" ], ["test" => "taste"]));
 // dd(queryBuilder("r", "contacts",  ["name" => "Delaistre" ]));
 // dd(queryBuilder("u", "voiture", ["modele" => "Ferrari" ], ["couleur" => "rouge" ], ["id" => 2]));

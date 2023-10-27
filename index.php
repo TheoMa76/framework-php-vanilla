@@ -4,10 +4,9 @@ require_once './configs/debug.php';
 
 use Theo\Controller\Database;
 
-echo "bonjour";
 $db = new Database();
-echo "salut";
-echo $db->table("Toto")->update(['filters' => ['name' => 'Maerten' , 'surname' => 'Theo'], "post" => ["mail" => "voila@ouais.com"]])->getQuery();
+
+$db->table("contacts")->post(["name" => "test", "surname" => "test"])->do();
 
 
 //$result = $pdo->getRelation(["marque","model","avis"],["ordinateur","avis"],"ordinateur.id = ordinateur_id",["ordinateur.id = 15"]);

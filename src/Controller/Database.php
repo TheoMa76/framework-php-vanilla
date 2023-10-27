@@ -10,7 +10,7 @@ class Database{
     protected $query;
     protected $lastResult;
     protected $connexion;
-    protected $key;
+    
     public function __construct($connexion = null) {
         $this->connexion = $connexion;
     }

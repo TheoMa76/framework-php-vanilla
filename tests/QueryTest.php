@@ -1,32 +1,30 @@
-<?php
+<?php 
 use PHPUnit\Framework\TestCase;
-use Theo\Controller\Database;
+use Jin\Controller\Database;
+class QueryTest extends TestCase {
 
-class QueryTest extends TestCase{
-
-    //test phpunit pour tester les methode
     public function testMethod(){
-        $database = new Database();
-        $this->assertEquals("get", $database->get([])->getMethod());
-        $this->assertEquals('post', $database->post([])->getMethod());
-        $this->assertEquals('update', $database->update([])->getMethod());
-        $this->assertEquals('soft-delete', $database->delete([])->getMethod());
-        $this->assertEquals('delete', $database->delete([],true)->getMethod());
-    }
+        $db = new Database();
+        $this->assertEquals("get", $db->get([])->getMethod());
+        $this->assertEquals("post", $db->post([])->getMethod());
+        $this->assertEquals("update", $db->update([])->getMethod());
+        $this->assertEquals("delete", $db->delete([], true)->getMethod());
+        $this->assertEquals("soft-delete", $db->delete([])->getMethod());
 
-    //test phpunit pour tester format
+        //5 asssertions, une par methode
+    }
     public function testFormat(){
-        $database = new Database();
-        $this->assertEquals("SELECT %s FROM %s WHERE %s ;", $database->get([])->getFormat());
-        $this->assertEquals("UPDATE %s SET %s WHERE %s ;", $database->update([])->getFormat());
-        $this->assertEquals("UPDATE %s SET %s WHERE %s ;", $database->delete([])->getFormat());
-        $this->assertEquals("DELETE FROM %s WHERE %s ;", $database->delete([],true)->getFormat());
-        $this->assertEquals("INSERT INTO %s %s VALUES %s ;",$database->post([])->getFormat());
+            $db = new Database();
+            $this->assertEquals("SELECT %s FROM %s WHERE %s ;", $db->get([])->getFormat());
+            $this->assertEquals("INSERT INTO %s %s VALUES %s ;", $db->post([])->getFormat());
+            $this->assertEquals("UPDATE %s SET %s WHERE %s ;", $db->update([])->getFormat());
+            $this->assertEquals("DELETE FROM %s WHERE %s;", $db->delete([], true)->getFormat());
+            $this->assertEquals("UPDATE %s SET %s WHERE %s ;", $db->delete([])->getFormat());
+ 
     }
-
-    //test phpunit pour tester les params
-    public function testParams(){
-        $database = new Database();
-        $this->assertEquals('name = "Maerten" AND surname = "Theo"', $database->get(['filters'=>['name'=>'Maerten','surname'=>'Theo']])->parseParams());        
+        public function testParamsListing(){
+            $db = new Database();
+            $this->assertEquals('name = "Delaistre" AND age = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
+ 
     }
 }

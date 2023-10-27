@@ -2,6 +2,6 @@ vendor/
 phpunit.xml.bak
 .phpunit.result.cache
 .phpuni/configs/global.php
-.phpunit.cache
+.phpunit.cache/
 
 /vendor/

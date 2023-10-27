@@ -83,7 +83,7 @@ class Database {
                 $format = "UPDATE %s SET %s WHERE %s ;";
                 break;
             case 'delete':
-                $format = "DELETE FROM %s WHERE %s;";
+                $format = "DELETE FROM %s WHERE %s ;";
                 break;
             case 'get':
             default: 

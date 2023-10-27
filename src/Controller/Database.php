@@ -10,7 +10,9 @@ class Database{
     protected $query;
     protected $lastResult;
     protected $connexion;
-    
+
+    protected $availableKeys = ['filters','post'];	
+
     public function __construct($connexion = null) {
         $this->connexion = $connexion;
     }
@@ -133,10 +135,17 @@ class Database{
         return $res;  
     }
     private function setParams($key,$data){
+        if(in_array($key, $this->availableKeys)){
+            return;
+        }
         $this->$key = $data;
         return $this;
     }
     public function getParams($key){
+        if(in_array($key, $this->availableKeys)){
+            return;
+        }
+
         return $this->$key;
     }
     private function setQuery($query){

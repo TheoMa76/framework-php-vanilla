@@ -5,4 +5,4 @@ phpunit.xml.bak
 /.phpunit.cache/
 
 /vendor/
-.phpunit.cache/test-results
+.phpunit.cache/test-results/

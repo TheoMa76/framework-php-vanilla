@@ -1,0 +1,10 @@
+{
+    "database": {
+      "host": "localhost",
+      "port": "3306",
+      "db_name": "ordinateur",
+      "user": "theo",
+      "password": "root"
+    }
+  }
+  

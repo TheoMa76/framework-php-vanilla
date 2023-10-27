@@ -1,20 +1,23 @@
 <?php
+require './vendor/autoload.php';
+require_once './configs/debug.php';
 
-require_once './configs/bootstrap.php';
-ob_start();
+use Theo\Controller\Database;
 
-if(isset($_GET["page"])){
-    fromInc($_GET['page']);
-}
+echo "bonjour";
+$db = new Database();
+echo "salut";
+echo $db->table("Toto")->update(['filters' => ['name' => 'Maerten' , 'surname' => 'Theo']])->getQuery();
+echo "test";
 
-$pageContent = [
-    "html" => ob_get_clean(),
 
-];
-if(isset($_GET["layout"])){
-    include "./templates/layout/". $_GET["layout"] .".layout.php";
 
-}else{
-    include "./templates/layout/html.layout.php";
 
-}
+
+//$result = $pdo->getRelation(["marque","model","avis"],["ordinateur","avis"],"ordinateur.id = ordinateur_id",["ordinateur.id = 15"]);
+//$ordinateur = new Ordinateur("DAUBE","BELLE DAUBE", "0","0","0","999999999");
+//update($ordinateur,10);
+//$result = $pdo->findAll('ordinateur');
+// $html = new htmlGen();
+// $html->display(['ordinateur','avis'],'relation',"ordinateur.id = 15","ordinateur.id = ordinateur_id",["marque","model","avis"]);
+//dd($result);
